@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -14,36 +15,43 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *  @Groups("get:article")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"get:article","get:cat"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"get:article","get:cat"})
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"get:article","get:cat"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"get:article","get:cat"})
      */
     private $isEnStock;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"get:article","get:cat"})
      */
     private $paysOrigin;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="articles")
+     *  @Groups("get:article")
      */
     private $categorie;
 
